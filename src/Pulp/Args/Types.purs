@@ -6,6 +6,7 @@ module Pulp.Args.Types
   , directory
   , directories
   , versionBump
+  , stringArg
   ) where
 
 import Prelude
@@ -107,3 +108,6 @@ versionBump arg =
     Nothing ->
       fail ("Not a valid version bump. Must be: 'major', 'minor', 'patch', "
             <> "or a version.")
+
+stringArg :: ArgumentParser
+stringArg arg = pure (toForeign arg)

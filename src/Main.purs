@@ -50,6 +50,7 @@ import Pulp.BumpVersion as BumpVersion
 import Pulp.Publish as Publish
 import Pulp.Watch as Watch
 import Pulp.Shell as Shell
+import Pulp.Dep as Dep
 
 globals :: Array Args.Option
 globals = [
@@ -187,6 +188,8 @@ commands = [
       Args.option "skipCompile" ["--skip-compile"] Type.flag
         "Assume PureScript code has already been compiled. Useful for when you want to pass options to purs."
       ] <> buildArgs,
+  Args.commandWithArgs "dep" "Manage project deps." Nothing Dep.action []
+    [Args.argument "command" Type.stringArg "Run a dependency management command. Run `pulp dep commandlist` to see a list of commands available." true],
   Args.command "run" "Compile and run the project." remainderToProgram Run.action $ [
     Args.optionDefault "runtime" ["--runtime", "-r"] Type.string
       "Run the program using this command instead of Node." "node"
